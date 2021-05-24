@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>
+            h1 {
+                background-color: rgb(61, 105, 131);
+                color: white;
+                text-align: center;
+            }
+            input[type=text] {
+                border: none;
+                border-bottom: 2px solid rgb(61, 105, 131);
+                background-color: rgb(61, 105, 131);
+                color: white;
+                
+            }                 
+            input[type=text]:hover{
+                    background-color:rgb(61, 105, 131);
+            }
+            /*h1:hover{
+                    background-color: rgb(219, 231, 108);
+            }*/
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+            background-color: #dddddd;
+            }
+
+        </style>
+    </head>
+
+    <link rel="manifest" href="manifest.json">
+
+    <body style="background-color: rgb(61, 105, 131);">
+        <h1>Github Profile</h1>
+        <input class="w3-input" type="text" id="text_input" ><br>
+        <center>
+        <input type="button" class="w3-button w3-black" onclick="gitdata()" value="Get Profile"><br><br>
+        <h1>Avatar</h1>
+        <div id='git_image'>
+            <img src="" alt="profile image" id="image">
+            <!-- <p id='para'></p> -->
+        <table style="width:100%">
+            <tr>
+                <h1>Information of the User</h1>
+            </tr>
+            <tr>
+                <td>Name </td> <td><p id='demo'></p></td>
+            </tr>
+            <tr>
+                <td>Followers </td><td><p id='demo1'></p></td>
+            </tr>
+            <tr>
+                <td>Following </td><td> <p id='demo2'></p></td>
+            </tr>
+            <tr>
+                <td>ID </td><td> <p id='demo3'></p></td>
+            </tr>
+            <tr>
+                <td>Location </td><td> <p id='demo4'></p></td>
+            </tr>
+            <tr>
+                <td>HTML URL </td><td> <p href="https://github.com" id='demo5'></p></td>
+            </tr>
+            <tr>
+                <td>Public Repositories </td><td> <p id='demo6'></p></td>
+            </tr>
+            <tr>
+                <td>Avatar URL </td><td> <p id='demo7'></p></td>
+            </tr>
+            <tr>
+                <td>Events URL </td><td> <p id='demo8'></p></td>
+            </tr>
+            <tr>
+                <td>Created at </td><td> <p id='demo9'></p></td>
+            </tr>
+            <tr>
+                <td>Updated at </td><td> <p id='demo10'></p></td>
+            </tr>
+            <tr>
+                <td>Organization URL </td><td> <p id='demo11'></p></td>
+            </tr>
+            <tr>
+                <td>Repos URL </td><td> <p id='demo12'></p></td>
+            </tr>
+            <tr>
+                <td>Blog Website </td><td> <p id='demo13'></p></td>
+            </tr>
+            <tr>
+                <td>Bio </td><td> <p id='demo14'></p></td>
+            </tr>
+            <tr>
+                <td>Subscriptions URL </td><td> <p id='demo15'></p></td>
+            </tr>
+        </table>
+        </div>
+        </center>
+        <h1>RAW DATA</h1>
+        <p id='para'></p>
+    </body>
+<script>
+    function gitdata(){
+
+    var url='https://api.github.com/users/'+document.getElementById('text_input').value;
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.avatar_url)
+        var im = document.getElementById("image");
+        im.setAttribute("src",data.avatar_url);
+        
+        var gi= document.getElementById('para');
+        gi.innerHTML=JSON.stringify(data);
+        document.getElementById("demo").innerHTML = data.login;
+        document.getElementById("demo1").innerHTML = data.followers;
+        document.getElementById("demo2").innerHTML = data.following;
+        document.getElementById("demo3").innerHTML = data.id;
+        document.getElementById("demo4").innerHTML = data.location;
+        document.getElementById("demo5").innerHTML = data.html_url;
+        document.getElementById("demo6").innerHTML = data.public_repos;
+        document.getElementById("demo7").innerHTML = data.avatar_url;
+        document.getElementById("demo8").innerHTML = data.events_url;
+        document.getElementById("demo9").innerHTML = data.created_at;
+        document.getElementById("demo10").innerHTML = data.updated_at;
+        document.getElementById("demo11").innerHTML = data.organizations_url;
+        document.getElementById("demo12").innerHTML = data.repos_url;
+        document.getElementById("demo13").innerHTML = data.blog;
+        document.getElementById("demo14").innerHTML = data.bio;
+        document.getElementById("demo15").innerHTML = data.subscriptions_url;
+
+    })
+
+    .catch(function(response){
+        return response.status;
+        console.log(response.status);
+    });;
+    
+}
+</script>
+</html>
